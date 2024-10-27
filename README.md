@@ -42,9 +42,9 @@ POST /train
 ### Request Body
 
 ```json
-    "data_path": "/path/to/data/folder",  // Optional: Will use latest if not provided
-    "base_model_path": "xlm-roberta-base", // Optional: Default model if not provided
-    "custom_model_name": "my-custom-model", // Optional: Custom name for the trained model
+    "data_path": "./data/small-0001",  // Optional: Will use latest if not provided
+    "base_model_path": "./models/finetuned_xlm_roberta", // Optional: Default model if not provided
+    "custom_model_name": "medicine", // Optional: Custom name for the trained model
     "label_list": [                        // Optional: Custom label list
         "O",
         "B-PER", "I-PER",
@@ -70,7 +70,7 @@ POST /train
 ```json
 {
     "message": "Training completed successfully",
-    "model_path": "/path/to/models/NER_MODEL-0001",
+    "model_path": "./models/medicine-0002",
     "train_result": {
         "train_runtime": 1234.5678,
         "train_samples_per_second": 123.45
@@ -80,8 +80,8 @@ POST /train
         "eval_f1": 0.94,
         "eval_loss": 0.123
     },
-    "data_path": "/path/to/data/folder",
-    "base_model_path": "xlm-roberta-base",
+    "data_path": "./data/small-0001",
+    "base_model_path": ".models/finetuned_xlm_roberta",
     "warnings": []
 }
 ```
@@ -190,7 +190,7 @@ POST /process_conll
 - Body Parameters:
   - file: CoNLL file (required)
   - folder_name: Custom name for output folder (optional)
-  - ratios: Comma-separated train,val,test ratios (optional, default: 0.7,0.15,0.15)
+  - ratios: Comma-separated train, val, test ratios (optional, default: 0.7,0.15,0.15)
   - custom_map: JSON string of label mapping (optional)
 
 ### Postman Example
@@ -202,9 +202,9 @@ POST /process_conll
    - Keys:
      - file: (select File type) - Add .conll file
      - folder_name: (Text) my-dataset
-     - ratios: (Text) 0.8,0.1,0.1
-     - custom_map: (Text) {"0": "O", "1": "B-PER", "2": "I-PER"}
-
+     - ratios: (Text) 0.7,0.15,0.15
+     - custom_map: (Text) {"0": "O", "1": "B-PER", "2": "I-PER", "3": "B-ORG", "4": "I-ORG", "5": "B-LOC", "6": "I-LOC", "7": "B-MISC", "8": "I-MISC"}
+       
 ### Response
 
 ```json
